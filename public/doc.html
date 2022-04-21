@@ -57,6 +57,30 @@
     color: rgb(255, 118, 118);
     padding: 20px 10px;
   }
+
+  .response {
+    border: solid 1px;
+    padding: 10px 20px;
+    margin: 5px;
+  }
+
+  .response.ok {
+    border: solid 1px green;
+  }
+
+  .response.error {
+    border: solid 1px rgb(128, 0, 0);
+  }
+
+  .status.ok {
+    color: green;
+    font-weight: bolder;
+  }
+
+  .status.error {
+    color: rgb(128, 0, 0);
+    font-weight: bolder;
+  }
 </style>
 
 <body>
@@ -81,6 +105,90 @@
     }
   </div>
   <sup><b>Note:</b> This Account is for testing propose only</sup>
+  <h3>Response</h3>
+
+  <div class="response ok">
+    <div class="status ok">200</div>
+    { ok: true }
+  </div>
+  <div class="response error">
+    <div class="status error">400</div>
+    {
+    ok: false,
+    message: "email is required",
+    } <br>
+    <sup>email is empty or not given</sup>
+    <div class="status error">400</div>
+    {
+    ok: false,
+    message: "phoneNumber is required",
+    } <br>
+    <sup>phoneNumber is empty or not given</sup>
+    <div class="status error">400</div>
+    {
+    ok: false,
+    message: "password is required",
+    } <br>
+    <sup>password is empty or not given</sup>
+    <div class="status error">400</div>
+    {
+    ok: false,
+    message: "privilege is required",
+    } <br>
+    <sup>privilege is empty or not given</sup>
+    <div class="status error">500</div>
+    {
+    ok: false,
+    message: "Server error",
+    error: error,
+    } <br>
+    <sup>Error normally caused by Duplicated email or password.. email or password used already exist in the
+      database</sup>
+  </div>
+
+  <h2>Login Api</h2>
+  <div class="code-div">
+    <span class="method">POST</span>
+    https://blue-data-api.herokuapp.com/api/user/login
+  </div>
+  this request is a post request which will log a new user
+
+  <h3>Request Body</h3>
+  <div class="code-div api-body">
+
+    { <br>
+    <key>"email"</key>: <txt>"name@email.com"</txt>, <br>
+    <key>"password"</key>: <txt>"*********"</txt> <br> }
+  </div>
+  <sup><b>Note:</b> This Account is for testing propose only</sup>
+
+  <h3>Response</h3>
+
+  <div class="response ok">
+    <div class="status ok">200</div>
+    { <br>
+    "ok": true,<br>
+    "token": "jwtToken",<br>
+    "privilege": 1
+    <br> }
+  </div>
+  <div class="response error">
+    <div class="status error">404</div>
+
+    {
+    ok: false,
+    message: "User Not Found",
+    } <br>
+    <sup>Account not Found in the database</sup>
+    <div class="status error">500</div>
+    {
+    ok: false,
+    message: 'Server Error',
+    error:error
+    }<br>
+    <sup>This is a Server error</sup>
+
+  </div>
 </body>
 
 </html>
