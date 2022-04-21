@@ -16,6 +16,9 @@
   "scripts": {
     "dev": "nodemon index "
   },
+  "engines": {
+    "node": "17.8.0"
+  },
   "author": "",
   "license": "ISC",
   "description": ""
