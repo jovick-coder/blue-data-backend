@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Api Documentation</title>
+</head>
+<style>
+  h1 {
+    /* color: red; */
+  }
+
+  .code-div {
+    background-color: rgb(33, 33, 33);
+    color: #ddd;
+    padding: 20px 10px;
+    border-radius: 10px;
+    position: relative;
+  }
+
+  .code-div:hover::after {
+    content: 'Copy';
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    /* width: 100%; */
+    /* border: solid; */
+  }
+
+  .code-div:active::after {
+    content: 'Pls Copy the text no javascript for now to copy for you :-)';
+    position: absolute;
+    top: 10px;
+    right: 15px;
+
+  }
+
+  .code-div.api-body {
+    color: #ddd;
+  }
+
+  .code-div txt {
+    color: rgb(232, 172, 61);
+  }
+
+  .code-div key {
+    color: rgb(145, 187, 242);
+  }
+
+  .code-div num {
+    color: rgb(138, 192, 128);
+  }
+
+  .code-div .method {
+    color: rgb(255, 118, 118);
+    padding: 20px 10px;
+  }
+</style>
+
+<body>
+  <h1>i am the documentation of this API</h1>
+
+  <h2>Register Api</h2>
+  <div class="code-div">
+    <span class="method">POST</span>
+    http://localhost:5000/api/user/register
+  </div>
+  this request is a post request which will register a new user
+
+  <h3>Request Body</h3>
+  <div class="code-div api-body">
+    { <br>
+    <key> "email"</key>: <txt>"victorjosiahm3@gmail.com"</txt>, <br>
+    <key> "fullName"</key>: <txt>"Josiah Victor"</txt>,<br>
+    <key>"userName"</key>: <txt>"Jovick"</txt>,<br>
+    <key>"phoneNumber"</key>:<num> 07043317472</num>, <br>
+    <key>"password"</key>: <txt>"07043314241"</txt>, <br>
+    <key>"privilege"</key>: <num>1</num> <br>
+    }
+  </div>
+</body>
+
+</html>
