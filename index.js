@@ -1,10 +1,16 @@
 require("dotenv").config();
 const express = require("express");
 const app = express();
+const cors = require("cors");
 const fs = require("fs");
 const { default: mongoose } = require("mongoose");
 const userRouter = require("./router/userRouter");
 
+app.use(
+  cors({
+    origin: "*",
+  })
+);
 app.get("/", (req, res) => {
   fs.readFile("./public/doc.html", "utf8", function (err, html) {
     res.send(html);
