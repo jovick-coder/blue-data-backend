@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-const { required } = require("nodemon/lib/config");
 const userSchema = new mongoose.Schema({
   avatar: {
     type: String,
@@ -27,6 +26,11 @@ const userSchema = new mongoose.Schema({
   privilege: {
     type: Number,
     required: true,
+  },
+  joinDate: {
+    type: Date,
+    required: true,
+    default: Date.now(),
   },
 });
 module.exports = mongoose.model("User", userSchema);
