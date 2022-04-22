@@ -203,6 +203,141 @@
     <sup>This is a Server error</sup>
 
   </div>
+  <!--  Account -->
+  <h2> Get Account Balance</h2>
+  <div class="code-div">
+    <span class="method">GET</span>
+    https://blue-data-api.herokuapp.com/api/account
+  </div>
+  <!-- this request is a post request which will log a new user -->
+
+  <h3>Request Header</h3>
+  <div class="code-div api-body">
+
+    -- <key>Authorization</key> : <txt>jwtToken</txt>
+  </div>
+  <sup><b>Note:</b> This Account is for testing propose only</sup>
+
+  <h3>Response</h3>
+
+  <div class="response ok">
+    <div class="status ok">200</div>
+    {
+    "ok": true, <br>
+    "data": { <br>
+    "_id": "6262c16c4e05c961c49e2e6b", <br>
+    "uId": "6262c16c4e05c961c49e2e69", <br>
+    "amount": 300332, <br>
+    "privilege": 1, <br>
+    "__v": 0 <br>
+    }
+
+  </div>
+  <a href="#errorHandeling">See The Errors</a>
+
+
+  <!--  Account -->
+  <h2>Found Account</h2>
+  <div class="code-div">
+    <span class="method">PUT</span>
+    https://blue-data-api.herokuapp.com/api/account
+  </div>
+  <!-- this request is a post request which will log a new user -->
+
+  <h3>Request Header</h3>
+  <div class="code-div api-body">
+
+    -- <key>Authorization</key> : <txt>jwtToken</txt>
+  </div>
+  <h3>Request Body</h3>
+  <div class="code-div api-body">
+
+    {<br>
+    <key>"amount"</key>:<txt>300332</txt><br> }
+
+  </div>
+  <sup><b>Note:</b> This Account is for testing propose only</sup>
+
+  <h3>Response</h3>
+
+  <div class="response ok">
+    <div class="status ok">200</div>
+    {<br>
+    "ok": true,
+    <br>
+
+    }
+  </div>
+  <a href="#errorHandeling">See The Errors</a>
+
+  <!--  history -->
+  <h2>History</h2>
+  <div class="code-div">
+    <span class="method">GET</span>
+    https://blue-data-api.herokuapp.com/api/history
+  </div>
+  <!-- this request is a post request which will log a new user -->
+
+  <h3>Request Header</h3>
+  <div class="code-div api-body">
+
+    -- <key>Authorization</key> : <txt>jwtToken</txt>
+  </div>
+  <sup><b>Note:</b> This Account is for testing propose only</sup>
+
+  <h3>Response</h3>
+
+  <div class="response ok">
+    <div class="status ok">200</div>
+
+
+    { <br>
+    "ok": true, <br>
+    "data": [
+    {...}, {...}, {...}
+    ] <br>
+    }
+  </div>
+  <a href="#errorHandeling">See The Errors</a>
+
+
+
+
+
+  <!-- Last of all -->
+  <H2 id="errorHandeling">Error handling</H2>
+  <div class="response error">
+    <div class="status error">401</div>
+
+    { <br>
+    "ok": false,<br>
+    "message": "unAuthorized User" <br>
+    }<br>
+    <sup>Jwt not Provided</sup>
+
+    <div class="status error">400</div>
+    {
+    "ok": false, <br>
+    "message": "server error", <br>
+    "error": "JsonWebTokenError: invalid token." <br>
+    } <br>
+    <sup>Wrong jwtToken</sup>
+
+    <div class="status error">400</div>
+    {
+    ok: false,
+    message: "password is required",
+    } <br>
+    <sup>password is empty or not given</sup>
+    <div class="status error">500</div>
+    {
+    ok: false,
+    message: 'Server Error',
+    error:error
+    }<br>
+    <sup>This is a Server error</sup>
+
+  </div>
 </body>
 
 </html>
