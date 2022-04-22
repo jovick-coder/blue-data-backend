@@ -2,7 +2,7 @@ const userAccountRouter = require("express").Router();
 const History = require("../model/historyModel");
 const UserBank = require("../model/userAccountModel");
 
-userAccountRouter.post("/", (req, res) => {
+userAccountRouter.put("/", async (req, res) => {
   const { userId, userPrivilege } = res.locals;
   const amount = req.body.amount;
   if (!amount || amount === "")
@@ -14,6 +14,13 @@ userAccountRouter.post("/", (req, res) => {
     .update({ amount: newAmount })
     .exec();
 
+  const newHistory = new History({
+    uId: userId,
+    amount: newAmount,
+    description: "",
+    type: "",
+  });
+  await newHistory.save();
   res.send({ ok: true });
 });
 
