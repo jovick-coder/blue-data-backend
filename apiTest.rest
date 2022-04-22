@@ -1,0 +1,18 @@
+
+
+POST http://localhost:5000/api/user/login
+Accept: */*
+
+
+{ "email": "victorjosiahm3@gmail.com", 
+"password":"07043314241" }
+
+
+###
+GET http://localhost:5000/api/account
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1SWQiOiI2MjYyYzE2YzRlMDVjOTYxYzQ5ZTJlNjkiLCJwcml2aWxlZ2UiOjEsImlhdCI6MTY1MDY0ODYwMH0.lvLycVtGRsCMFHbTWbERYBBrrnDro-og9mvfyYjNcKk
+
+###
+GET http://localhost:5000/api/history/
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1SWQiOiI2MjYyYzE2YzRlMDVjOTYxYzQ5ZTJlNjkiLCJwcml2aWxlZ2UiOjEsImlhdCI6MTY1MDY0ODYwMH0.lvLycVtGRsCMFHbTWbERYBBrrnDro-og9mvfyYjNcKk
+
