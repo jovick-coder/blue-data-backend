@@ -1,10 +1,10 @@
 require("dotenv").config();
 const userRouter = require("express").Router();
-const jsonwebtoken = require("jsonwebtoken");
 const jwt = require("jsonwebtoken");
 // const cloudinary = require("../utils/cloudinary");
 // const upload = require("../utils/multer");
 const User = require("../model/userModel");
+const UserBank = require("../model/userAccountModel");
 
 function respond(res, statusCode, message) {
   res.status(statusCode).send(message);
@@ -41,7 +41,13 @@ userRouter.post("/register", async (req, res) => {
       privilege: privilege,
     });
     // Save user
-    await user.save();
+    const newUser = await user.save();
+    let bank = new UserBank({
+      uId: newUser._id,
+      amount: 0,
+      privilege: newUser.privilege,
+    });
+    await bank.save();
     res.json({ ok: true });
   } catch (error) {
     return respond(res, 500, {
@@ -56,7 +62,7 @@ userRouter.post("/login", async (req, res) => {
   if (!email || email === "")
     return respond(res, 400, {
       ok: false,
-      message: "phoneNumber is required",
+      message: "email is required",
     });
 
   if (!password || password === "")
@@ -73,10 +79,11 @@ userRouter.post("/login", async (req, res) => {
     const token = jwt.sign(
       {
         uId: user._id,
+        privilege: user.privilege,
       },
       process.env.JWT_SECRET
     );
-    res.status(200).json({ ok: true, token: token, privilege: user.privilege });
+    res.status(200).json({ ok: true, token: token });
   } catch (error) {
     respond(res, 500, {
       ok: false,
