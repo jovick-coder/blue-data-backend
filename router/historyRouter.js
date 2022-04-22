@@ -6,7 +6,7 @@ historyRouter.get("/", async (req, res) => {
   // for user and resellers
   if (userPrivilege === 1 || 2) {
     try {
-      const history = await History.find({ uId: userId });
+      const history = await History.findOne({ uId: userId });
       if (!history) return res.status(404).send("history not found");
       return res.send({ ok: true, data: history });
     } catch (error) {
