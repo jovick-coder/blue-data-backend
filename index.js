@@ -44,7 +44,7 @@ async function authorization(req, res, next) {
     const { uId, privilege } = decode;
     const user = await User.findOne({ _id: uId, privilege: privilege });
     if (!user)
-      return respond(res, 404, {
+      return res.status(404).send({
         ok: false,
         message: "Authorized User Not Found",
       });
@@ -54,7 +54,9 @@ async function authorization(req, res, next) {
     // res.send(decode);
     next();
   } catch (error) {
-    res.send({ ok: false, message: "server error", error: error });
+    res
+      .status(400)
+      .send({ ok: false, message: "server error", error: error + "." });
   }
 }
 app.use(express.json());

@@ -6,11 +6,15 @@ historyRouter.get("/", async (req, res) => {
   // for user and resellers
   if (userPrivilege === 1 || 2) {
     try {
-      const history = await History.findOne({ uId: userId });
+      const history = await History.find({ uId: userId });
       if (!history) return res.status(404).send("history not found");
       return res.send({ ok: true, data: history });
     } catch (error) {
-      return res.send({ ok: false, message: "Server error", error: error });
+      return res.send({
+        ok: false,
+        message: "Server error",
+        error: error + ".",
+      });
     }
   }
   // for admin and super admin
@@ -20,7 +24,7 @@ historyRouter.get("/", async (req, res) => {
       if (!history) return res.status(404).send("history not found");
       res.send(res.locals);
     } catch (error) {
-      res.send({ ok: false, message: "Server error", error: error });
+      res.send({ ok: false, message: "Server error", error: error + "." });
     }
     return;
   }
