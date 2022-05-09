@@ -8,7 +8,9 @@ const jwt = require("jsonwebtoken");
 const userRouter = require("./router/userRouter");
 const historyRouter = require("./router/historyRouter");
 const userAccountRouter = require("./router/userAccountRouter");
+const notificationRouter = require("./router/notificationRouter");
 const User = require("./model/userModel");
+const userInfoRouter = require("./router/userInfo");
 
 app.use(
   cors({
@@ -36,7 +38,13 @@ async function authorization(req, res, next) {
   const token = req.headers.authorization;
 
   if (!token || token === "") {
-    return res.status(401).send({ ok: false, message: "unAuthorized User" });
+    return res
+      .status(401)
+      .send({
+        ok: false,
+        message: "unAuthorized User",
+        error: "empty token || invalid token",
+      });
   }
 
   try {
@@ -51,7 +59,6 @@ async function authorization(req, res, next) {
 
     res.locals.userId = uId;
     res.locals.userPrivilege = privilege;
-    // res.send(decode);
     next();
   } catch (error) {
     res
@@ -61,7 +68,9 @@ async function authorization(req, res, next) {
 }
 app.use(express.json());
 app.use("/api/user", userRouter);
+app.use("/api/userInfo", authorization, userInfoRouter);
 app.use("/api/history", authorization, historyRouter);
 app.use("/api/account", authorization, userAccountRouter);
+app.use("/api/notification", authorization, notificationRouter);
 
 // D16SbQEFWNflGfMO
