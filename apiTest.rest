@@ -1,18 +1,77 @@
+# Note This file is for test locally if yoy are using the hosted API replace the http://localhost:5000/ with https://blue-data-api.herokuapp.com/
 
+POST http://localhost:5000/api/user/register
+Content-Type: application/json
 
+{ "email": "admin@gmail.com", "fullName":"Josiah Victor", "userName":"Jovick", "phoneNumber":"08037297150", "password":"07043314241", "privilege":4 }
+
+###
 POST http://localhost:5000/api/user/login
-Accept: */*
+Content-Type: application/json
 
+{ 
+  "email": "victorjosiahm3@gmail.com", 
+"password":"07043314241"
+ }
 
-{ "email": "victorjosiahm3@gmail.com", 
-"password":"07043314241" }
+# { 
+#   "email": "admin@gmail.com", 
+# "password":"07043314241"
+#  }
+
+###
+GET http://localhost:5000/api/user/*
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1SWQiOiI2MjYyYzE2YzRlMDVjOTYxYzQ5ZTJlNjkiLCJwcml2aWxlZ2UiOjEsImlhdCI6MTY1MDY0ODYwMH0.lvLycVtGRsCMFHbTWbERYBBrrnDro-og9mvfyYjNcKk
+# Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1SWQiOiI2MjY2ODA0ODkwOGVjMDY4NGYxZGY0ZTUiLCJwcml2aWxlZ2UiOjQsImlhdCI6MTY1MDg4NDY4M30.jwGsrnWULWaFzI3mBSWuNcEK0G_xyFrotDoa-n_2IHA
+###
+GET http://localhost:5000/api/userInfo/*
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1SWQiOiI2MjYyYzE2YzRlMDVjOTYxYzQ5ZTJlNjkiLCJwcml2aWxlZ2UiOjEsImlhdCI6MTY1MDY0ODYwMH0.lvLycVtGRsCMFHbTWbERYBBrrnDro-og9mvfyYjNcKk
+# Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1SWQiOiI2MjY2ODA0ODkwOGVjMDY4NGYxZGY0ZTUiLCJwcml2aWxlZ2UiOjQsImlhdCI6MTY1MDg4NDY4M30.jwGsrnWULWaFzI3mBSWuNcEK0G_xyFrotDoa-n_2IHA
 
 
 ###
 GET http://localhost:5000/api/account
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1SWQiOiI2MjYyYzE2YzRlMDVjOTYxYzQ5ZTJlNjkiLCJwcml2aWxlZ2UiOjEsImlhdCI6MTY1MDY0ODYwMH0.lvLycVtGRsCMFHbTWbERYBBrrnDro-og9mvfyYjNcKk
+# Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1SWQiOiI2MjY2ODA0ODkwOGVjMDY4NGYxZGY0ZTUiLCJwcml2aWxlZ2UiOjQsImlhdCI6MTY1MDg4NDY4M30.jwGsrnWULWaFzI3mBSWuNcEK0G_xyFrotDoa-n_2IHA
+
+###
+PUT  http://localhost:5000/api/account
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1SWQiOiI2MjYyYzE2YzRlMDVjOTYxYzQ5ZTJlNjkiLCJwcml2aWxlZ2UiOjEsImlhdCI6MTY1MDY0ODYwMH0.lvLycVtGRsCMFHbTWbERYBBrrnDro-og9mvfyYjNcKk
+# Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1SWQiOiI2MjY2ODA0ODkwOGVjMDY4NGYxZGY0ZTUiLCJwcml2aWxlZ2UiOjQsImlhdCI6MTY1MDg4NDY4M30.jwGsrnWULWaFzI3mBSWuNcEK0G_xyFrotDoa-n_2IHA
+
+{
+    "amount":100,
+    "method":"+"
+}
 
 ###
 GET http://localhost:5000/api/history/
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1SWQiOiI2MjYyYzE2YzRlMDVjOTYxYzQ5ZTJlNjkiLCJwcml2aWxlZ2UiOjEsImlhdCI6MTY1MDY0ODYwMH0.lvLycVtGRsCMFHbTWbERYBBrrnDro-og9mvfyYjNcKk
+# Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1SWQiOiI2MjY2ODA0ODkwOGVjMDY4NGYxZGY0ZTUiLCJwcml2aWxlZ2UiOjQsImlhdCI6MTY1MDg4NDY4M30.jwGsrnWULWaFzI3mBSWuNcEK0G_xyFrotDoa-n_2IHA
 
+###
+DELETE http://localhost:5000/api/history/*
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1SWQiOiI2MjYyYzE2YzRlMDVjOTYxYzQ5ZTJlNjkiLCJwcml2aWxlZ2UiOjEsImlhdCI6MTY1MDY0ODYwMH0.lvLycVtGRsCMFHbTWbERYBBrrnDro-og9mvfyYjNcKk
+# Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1SWQiOiI2MjY2ODA0ODkwOGVjMDY4NGYxZGY0ZTUiLCJwcml2aWxlZ2UiOjQsImlhdCI6MTY1MDg4NDY4M30.jwGsrnWULWaFzI3mBSWuNcEK0G_xyFrotDoa-n_2IHA
+
+
+###
+GET  http://localhost:5000/api/notification
+Content-Type: application/json
+# Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1SWQiOiI2MjYyYzE2YzRlMDVjOTYxYzQ5ZTJlNjkiLCJwcml2aWxlZ2UiOjEsImlhdCI6MTY1MDY0ODYwMH0.lvLycVtGRsCMFHbTWbERYBBrrnDro-og9mvfyYjNcKk
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1SWQiOiI2MjY2ODA0ODkwOGVjMDY4NGYxZGY0ZTUiLCJwcml2aWxlZ2UiOjQsImlhdCI6MTY1MDg4NDY4M30.jwGsrnWULWaFzI3mBSWuNcEK0G_xyFrotDoa-n_2IHA
+
+
+###
+POST  http://localhost:5000/api/notification
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1SWQiOiI2MjYyYzE2YzRlMDVjOTYxYzQ5ZTJlNjkiLCJwcml2aWxlZ2UiOjEsImlhdCI6MTY1MDY0ODYwMH0.lvLycVtGRsCMFHbTWbERYBBrrnDro-og9mvfyYjNcKk
+# Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1SWQiOiI2MjY2ODA0ODkwOGVjMDY4NGYxZGY0ZTUiLCJwcml2aWxlZ2UiOjQsImlhdCI6MTY1MDg4NDY4M30.jwGsrnWULWaFzI3mBSWuNcEK0G_xyFrotDoa-n_2IHA
+
+{
+  "message": "new notification test"
+}
