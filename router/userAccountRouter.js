@@ -5,23 +5,57 @@ const UserBank = require("../model/userAccountModel");
 userAccountRouter.put("/", async (req, res) => {
   const { userId, userPrivilege } = res.locals;
   const amount = req.body.amount;
+  const method = req.body.method;
   if (!amount || amount === "")
     return res.status(400).send({ ok: false, message: "Amount is required" });
+  if (!method || method === "")
+    return res.status(400).send({ ok: false, message: "Method is required" });
+  if (method !== "+" && method !== "-")
+    return res
+      .status(400)
+      .send({ ok: false, message: "Invalid Method " + method });
 
   const newAmount = req.body.amount;
+  try {
+    const oldAmount = await UserBank.findOne({
+      uId: userId,
+      privilege: userPrivilege,
+    });
 
-  UserBank.findOne({ uId: userId, privilege: userPrivilege })
-    .update({ amount: newAmount })
-    .exec();
+    const { amount } = oldAmount;
 
-  const newHistory = new History({
-    uId: userId,
-    amount: newAmount,
-    description: "",
-    type: "",
-  });
-  await newHistory.save();
-  res.send({ ok: true });
+    let calculatedAmount;
+
+    if (method === "+") {
+      calculatedAmount = amount + newAmount;
+    }
+    if (method === "-") {
+      if (amount < newAmount) {
+        return res
+          .status(400)
+          .send({ ok: false, message: "Insufficient Balance" });
+      }
+      calculatedAmount = amount - newAmount;
+    }
+    UserBank.findOneAndUpdate(
+      {
+        uId: userId,
+        privilege: userPrivilege,
+      },
+      { amount: calculatedAmount }
+    ).exec();
+
+    const newHistory = new History({
+      uId: userId,
+      amount: newAmount,
+      description: "",
+      type: method,
+    });
+    await newHistory.save();
+    res.send({ ok: true });
+  } catch (error) {
+    res.send({ ok: false, message: "Server error", error: error + "." });
+  }
 });
 
 userAccountRouter.get("/", async (req, res) => {
