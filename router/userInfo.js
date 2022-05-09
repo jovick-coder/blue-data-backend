@@ -14,6 +14,11 @@ userInfoRouter.get("/:id", async (req, res) => {
   const { userId, userPrivilege } = res.locals;
 
   const id = req.params.id;
+
+  if (id === "") {
+    res.status(400).send({ ok: false, message: "Invalid Parameter" });
+    return;
+  }
   // if params is * and user is admin or superAdmin list all users
 
   if (id === "*") {
@@ -34,10 +39,6 @@ userInfoRouter.get("/:id", async (req, res) => {
     }
   }
 
-  if (id === "") {
-    res.status(400).send({ ok: false, message: "Invalid Parameter" });
-    return;
-  }
   // Get a single user
   try {
     const user = await User.findOne({ _id: id });
