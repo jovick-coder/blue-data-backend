@@ -66,7 +66,7 @@ userRouter.post("/login", async (req, res) => {
     });
 
   if (!password || password === "")
-    return respond(res, 400, { ok: true, message: "password is required" });
+    return respond(res, 400, { ok: false, message: "password is required" });
 
   try {
     const user = await User.findOne({ email: email, password: password });
@@ -92,5 +92,44 @@ userRouter.post("/login", async (req, res) => {
     });
   }
 });
+
+// userRouter.get("/:id", async (req, res) => {
+//   const { userId, userPrivilege } = res.locals;
+
+//   const id = req.params.id;
+//   // if params is * and user is admin or superAdmin list all users
+
+//   if (id === "*") {
+//     if (userPrivilege !== 3 && userPrivilege !== 4) {
+//       res.status(401).send({ ok: false, message: "UnAuthorized User " });
+//       return;
+//     }
+
+//     try {
+//       const user = await User.find();
+//       if (!user) {
+//         res.status(404).send({ ok: false, message: "users not found" });
+//         return;
+//       }
+//       return res.send({ ok: true, data: user });
+//     } catch (error) {
+//       res.send({ ok: false, message: "Server error", error: error + "." });
+//     }
+//   }
+
+//   if (id === "") {
+//     res.status(400).send({ ok: false, message: "Invalid Parameter" });
+//     return;
+//   }
+//   // Get a single user
+//   try {
+//     const user = await User.findOne({ _id: id });
+//     if (!user)
+//       return res.status(404).send({ ok: false, message: "user not found" });
+//     res.send({ ok: true, data: user });
+//   } catch (error) {
+//     res.send({ ok: false, message: "Server error", error: error + "." });
+//   }
+// });
 
 module.exports = userRouter;
