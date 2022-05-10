@@ -11,7 +11,7 @@ function respond(res, statusCode, message) {
 }
 
 userRouter.post("/register", async (req, res) => {
-  const { email, fullName, userName, phoneNumber, password, privilege } =
+  let { email, fullName, userName, phoneNumber, password, privilege } =
     req.body;
   if (!email || email === "")
     return respond(res, 400, {
@@ -27,8 +27,10 @@ userRouter.post("/register", async (req, res) => {
   if (!password || password === "")
     return respond(res, 400, { ok: true, message: "password is required" });
 
-  if (!privilege || privilege === "")
-    return respond(res, 400, { ok: true, message: "privilege is required" });
+  if (!privilege || privilege === "") {
+    privilege = 1;
+  }
+  // return respond(res, 400, { ok: true, message: "privilege is required" });
 
   try {
     // Create new user
