@@ -100,8 +100,17 @@ userInfoRouter.get("/:id", async (req, res) => {
   }
 });
 
-// userInfoRouter.put('/',(req,res)=>{
-
-// })
+userInfoRouter.put("/", async (req, res) => {
+  const { userId, userPrivilege } = res.locals;
+  const updateProfile = req.body;
+  // console.log(updateProfile);
+  try {
+    const updateUser = await User.updateOne({ _id: userId }, updateProfile);
+    return res.send({ ok: true });
+  } catch (error) {
+    res.send({ ok: false, message: "Server error", error: error + "." });
+  }
+  // console.log(updateUser);
+});
 
 module.exports = userInfoRouter;
