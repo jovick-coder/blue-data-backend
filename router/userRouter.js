@@ -94,6 +94,34 @@ userRouter.post("/login", async (req, res) => {
     });
   }
 });
+userRouter.post("/auth", async (req, res) => {
+  const { email, password } = req.body;
+  if (!email || email === "")
+    return respond(res, 400, {
+      ok: false,
+      message: "email is required",
+    });
+
+  if (!password || password === "")
+    return respond(res, 400, { ok: false, message: "password is required" });
+
+  try {
+    const user = await User.findOne({ email: email, password: password });
+    if (!user)
+      return respond(res, 404, {
+        ok: false,
+        message: "Authorized User Not Found",
+      });
+
+    res.status(200).json({ ok: true });
+  } catch (error) {
+    respond(res, 500, {
+      ok: false,
+      message: "Server Error",
+      error: error,
+    });
+  }
+});
 
 // userRouter.get("/:id", async (req, res) => {
 //   const { userId, userPrivilege } = res.locals;
