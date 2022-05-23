@@ -20,14 +20,65 @@ userInfoRouter.get("/:id", async (req, res) => {
   }
   // if params is * and user is admin or superAdmin list all users
 
-  if (id === "*") {
+  if (id === "1") {
     if (userPrivilege !== 3 && userPrivilege !== 4) {
       res.status(401).send({ ok: false, message: "UnAuthorized User " });
       return;
     }
 
     try {
-      const user = await User.find();
+      const user = await User.find({ privilege: 1 });
+      if (!user) {
+        res.status(404).send({ ok: false, message: "users not found" });
+        return;
+      }
+      return res.send({ ok: true, data: user });
+    } catch (error) {
+      res.send({ ok: false, message: "Server error", error: error + "." });
+    }
+  }
+  if (id === "2") {
+    if (userPrivilege !== 3 && userPrivilege !== 4) {
+      res.status(401).send({ ok: false, message: "UnAuthorized User " });
+      return;
+    }
+
+    try {
+      const user = await User.find({ privilege: 2 });
+      if (!user) {
+        res.status(404).send({ ok: false, message: "users not found" });
+        return;
+      }
+      return res.send({ ok: true, data: user });
+    } catch (error) {
+      res.send({ ok: false, message: "Server error", error: error + "." });
+    }
+  }
+  if (id === "3") {
+    if (userPrivilege !== 3 && userPrivilege !== 4) {
+      res.status(401).send({ ok: false, message: "UnAuthorized User " });
+      return;
+    }
+
+    try {
+      const user = await User.find({ privilege: 3 });
+      if (!user) {
+        res.status(404).send({ ok: false, message: "users not found" });
+        return;
+      }
+      return res.send({ ok: true, data: user });
+    } catch (error) {
+      res.send({ ok: false, message: "Server error", error: error + "." });
+    }
+  }
+  if (id === "4") {
+    if (userPrivilege !== 3 && userPrivilege !== 4) {
+      res.status(401).send({ ok: false, message: "UnAuthorized User " });
+      return;
+    }
+
+    try {
+      const user = await User.find({ privilege: 4 });
       if (!user) {
         res.status(404).send({ ok: false, message: "users not found" });
         return;
@@ -48,5 +99,9 @@ userInfoRouter.get("/:id", async (req, res) => {
     res.send({ ok: false, message: "Server error", error: error + "." });
   }
 });
+
+// userInfoRouter.put('/',(req,res)=>{
+
+// })
 
 module.exports = userInfoRouter;
