@@ -4,37 +4,64 @@ const User = require("../model/userModel.js");
 
 notificationRouter.get("/", async (req, res) => {
   const { userId, userPrivilege } = res.locals;
-  // for user and resellers
-  if (userPrivilege === 1 || 2) {
-    try {
-      const notification = await Notification.find({ uId: userId });
+  // const id = req.params.id;
+  try {
+    // for user and resellers
+    if (userPrivilege === 1 || userPrivilege === 2) {
+      const notification = await Notification.find({
+        $or: [
+          {
+            privilege: "*",
+          },
+          {
+            privilege: userPrivilege,
+          },
+          {
+            privilege: userId,
+          },
+        ],
+      });
       if (!notification)
         return res
           .status(404)
           .send({ ok: false, message: "notification not found" });
       return res.send({ ok: true, data: notification });
-    } catch (error) {
-      return res.send({
-        ok: false,
-        message: "Server error",
-        error: error + ".",
-      });
     }
-  }
-  // for admin and super admin
-  if (userPrivilege === 3 || 4) {
-    try {
+    // for admin and super admin
+    if (userPrivilege === 3 || userPrivilege === 4) {
       const notification = await Notification.find();
+      if (!notification) {
+        return res
+          .status(404)
+          .send({ ok: false, message: "notification not found" });
+      }
       if (!notification)
         return res
           .status(404)
           .send({ ok: false, message: "notification not found" });
-      res.send(res.locals);
-    } catch (error) {
-      res.send({ ok: false, message: "Server error", error: error + "." });
+      return res.send({ ok: true, data: notification });
     }
-    return;
+  } catch (error) {
+    return res.send({
+      ok: false,
+      message: "Server error",
+      error: error + ".",
+    });
   }
+  // }
+  //   if (userPrivilege === 3 || 4) {
+  //     try {
+  //       const notification = await Notification.find();
+  //       if (!notification)
+  //         return res
+  //           .status(404)
+  //           .send({ ok: false, message: "notification not found" });
+  //       res.send(res.locals);
+  //     } catch (error) {
+  //       res.send({ ok: false, message: "Server error", error: error + "." });
+  //     }
+  //     return;
+  //   }
 });
 
 notificationRouter.delete("/:id", async (req, res) => {
@@ -75,8 +102,7 @@ notificationRouter.delete("/:id", async (req, res) => {
 
 notificationRouter.post("/", async (req, res) => {
   const { userId, userPrivilege } = res.locals;
-  let { message, category } = req.body;
-
+  let { message, category, privilege, adminName } = req.body;
   if (userPrivilege !== 3 && userPrivilege !== 4) {
     res.status(401).send({ ok: false, message: "UnAuthorized User " });
     return;
@@ -100,16 +126,11 @@ notificationRouter.post("/", async (req, res) => {
   //   });
   // }
   try {
-    const user = await User.findOne({ _id: userId, privilege: userPrivilege });
-    if (!user)
-      return res.status(404).send({
-        ok: false,
-        message: "Admin Not Found",
-      });
     const notification = new Notification({
-      adminName: user.userName,
-      message: req.body.message,
-      privilege: userPrivilege,
+      adminName: adminName,
+      adminPrivilege: userPrivilege,
+      message: message,
+      privilege: privilege,
       category: category,
     });
     // const notification =
