@@ -11,6 +11,7 @@ const userAccountRouter = require("./router/userAccountRouter");
 const notificationRouter = require("./router/notificationRouter");
 const User = require("./model/userModel");
 const userInfoRouter = require("./router/userInfo");
+const buySubscriptionRouter = require("./router/buySubscriptionRouter");
 
 app.use(
   cors({
@@ -38,13 +39,11 @@ async function authorization(req, res, next) {
   const token = req.headers.authorization;
 
   if (!token || token === "") {
-    return res
-      .status(401)
-      .send({
-        ok: false,
-        message: "unAuthorized User",
-        error: "empty token || invalid token",
-      });
+    return res.status(401).send({
+      ok: false,
+      message: "unAuthorized User",
+      error: "empty token || invalid token",
+    });
   }
 
   try {
@@ -72,5 +71,6 @@ app.use("/api/userInfo", authorization, userInfoRouter);
 app.use("/api/history", authorization, historyRouter);
 app.use("/api/account", authorization, userAccountRouter);
 app.use("/api/notification", authorization, notificationRouter);
+app.use("/api/buySub", authorization, buySubscriptionRouter);
 
 // D16SbQEFWNflGfMO
