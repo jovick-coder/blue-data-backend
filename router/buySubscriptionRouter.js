@@ -66,7 +66,7 @@ buySubscription.post("/", async (req, res) => {
 
     axios(config)
       .then(async function (response) {
-        console.log(JSON.stringify(response.data));
+        // console.log(JSON.stringify(response.data));
 
         calculatedAmount = oldAmount.amount - Amount;
         UserBank.findOneAndUpdate(

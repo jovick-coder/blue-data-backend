@@ -36,7 +36,7 @@ requestConfirmation.post("/", async (req, res) => {
       sAccountName: sAccountName,
       sAccountNumber: sAccountNumber,
     });
-    console.log(requestConfirmation);
+    // console.log(requestConfirmation);
     await requestConfirmation.save();
 
     const notification = new Notification({
