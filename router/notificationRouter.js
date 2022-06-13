@@ -7,40 +7,40 @@ notificationRouter.get("/", async (req, res) => {
   // const id = req.params.id;
   try {
     // for user and resellers
-    if (userPrivilege === 1 || userPrivilege === 2) {
-      const notification = await Notification.find({
-        $or: [
-          {
-            privilege: "*",
-          },
-          {
-            privilege: userPrivilege,
-          },
-          {
-            privilege: userId,
-          },
-        ],
-      });
-      if (!notification)
-        return res
-          .status(404)
-          .send({ ok: false, message: "notification not found" });
-      return res.send({ ok: true, data: notification });
-    }
-    // for admin and super admin
-    if (userPrivilege === 3 || userPrivilege === 4) {
-      const notification = await Notification.find();
-      if (!notification) {
-        return res
-          .status(404)
-          .send({ ok: false, message: "notification not found" });
-      }
-      if (!notification)
-        return res
-          .status(404)
-          .send({ ok: false, message: "notification not found" });
-      return res.send({ ok: true, data: notification });
-    }
+    // if (userPrivilege === 1 || userPrivilege === 2) {
+    const notification = await Notification.find({
+      $or: [
+        {
+          privilege: "*",
+        },
+        {
+          privilege: userPrivilege,
+        },
+        {
+          privilege: userId,
+        },
+      ],
+    });
+    if (!notification)
+      return res
+        .status(404)
+        .send({ ok: false, message: "notification not found" });
+    return res.send({ ok: true, data: notification });
+    // }
+    // // for admin and super admin
+    // if (userPrivilege === 3 || userPrivilege === 4) {
+    //   const notification = await Notification.find();
+    //   if (!notification) {
+    //     return res
+    //       .status(404)
+    //       .send({ ok: false, message: "notification not found" });
+    //   }
+    //   if (!notification)
+    //     return res
+    //       .status(404)
+    //       .send({ ok: false, message: "notification not found" });
+    //   return res.send({ ok: true, data: notification });
+    // }
   } catch (error) {
     return res.send({
       ok: false,
