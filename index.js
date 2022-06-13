@@ -12,6 +12,7 @@ const notificationRouter = require("./router/notificationRouter");
 const User = require("./model/userModel");
 const userInfoRouter = require("./router/userInfo");
 const buySubscriptionRouter = require("./router/buySubscriptionRouter");
+const requestConfirmation = require("./router/requestConfirmationRouter");
 
 app.use(
   cors({
@@ -72,5 +73,6 @@ app.use("/api/history", authorization, historyRouter);
 app.use("/api/account", authorization, userAccountRouter);
 app.use("/api/notification", authorization, notificationRouter);
 app.use("/api/buySub", authorization, buySubscriptionRouter);
+app.use("/api/request-confirmation", authorization, requestConfirmation);
 
 // D16SbQEFWNflGfMO
