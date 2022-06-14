@@ -61,7 +61,8 @@ buySubscription.post("/", async (req, res) => {
         Authorization: `Token ${process.env.GONGOZ_TOKEN}`,
         "Content-Type": "application/json",
         // change the origin when we get a new host
-        "Access-Control-Allow-Origin": "https://telecommerchant.netlify.app/",
+        // "Access-Control-Allow-Origin": "https://telecommerchant.netlify.app/",
+        "Access-Control-Allow-Origin": "*",
         "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
       },
       data: requestBody,
